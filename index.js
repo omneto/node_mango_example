@@ -1,19 +1,24 @@
 const express = require('express');
 const { MongoClient, ObjectId } = require('mongodb');
 
+require('dotenv').config();
+
 (async() => {
 
-    const url = 'mongodb+srv://admin:YREJccxYJ3vjAnay@cluster0.jftzm.mongodb.net/ocean_db?retryWrites=true&w=majority';
-
-    const dbname = 'ocean_db';
-
+    const dbUser = process.env.DB_USER;
+    const dbPassword = process.env.DB_PASSWORD;
+    const dbHost = process.env.DB_HOST;
+    const dbName = process.env.DB_NAME;
+    
+    const url = `mongodb+srv://${dbUser}:${dbPassword}@${dbHost}/${dbName}?retryWrites=true&w=majority`;
+    
     console.info('Conectando com o Banco de Dados...');
 
     const client = await MongoClient.connect(url, { useUnifiedTopology: true });
 
     console.info('MongoDB conectado com sucesso!!');
 
-    const db = client.db(dbname);
+    const db = client.db(dbName);
 
     const app = express();
 
