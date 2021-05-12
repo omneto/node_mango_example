@@ -31,16 +31,11 @@ const { MongoClient, ObjectId } = require('mongodb');
         
         const messageList = await messagesCollection.find().toArray();
         res.send(messageList);
-
-        // res.send(messages.filter(Boolean))
-
     });
 
     app.get('/messages/:id', async (req, res) => {
-        //const id = req.params.id - 1;
         const id = req.params.id;
 
-        //const message = messages[id];
         const message = await messagesCollection.findOne( { _id: ObjectId(id) } ); //.catch(console.error);
 
         if (!message) {
@@ -51,14 +46,6 @@ const { MongoClient, ObjectId } = require('mongodb');
     });
 
     app.post("/messages", async (req, res) => {
-        /*const message = req.body.message;
-
-        messages.push(message);
-
-        const id = messages.length;
-
-        res.send(`new message '${id}' created!`);*/
-
         const message = req.body;
 
         await messagesCollection.insertOne(message);
@@ -67,14 +54,6 @@ const { MongoClient, ObjectId } = require('mongodb');
     });
 
     app.put("/messages/:id", async (req, res) => {
-        /*const id = req.params.id - 1;
-
-        const message = req.body.message;
-
-        messages[id] = message;
-
-        res.send(`message '${req.params.id}' updated!`);*/
-
         const id = req.params.id;
 
         const message = req.body;
@@ -89,12 +68,6 @@ const { MongoClient, ObjectId } = require('mongodb');
     });
 
     app.delete("/messages/:id", async (req, res) => {
-        /*const id = req.params.id - 1;
-
-        delete messages[id];
-
-        res.send(`message '${req.params.id}' deleted!`);*/
-
         const id = req.params.id;
 
         await messagesCollection.deleteOne(
