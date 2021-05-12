@@ -3,9 +3,9 @@ const { MongoClient, ObjectId } = require('mongodb');
 
 (async() => {
 
-    const url = 'mongodb://localhost:27017';
+    const url = 'mongodb+srv://admin:YREJccxYJ3vjAnay@cluster0.jftzm.mongodb.net/ocean_db?retryWrites=true&w=majority';
 
-    const dbname = 'ocean-bancodados-11-05-2021';
+    const dbname = 'ocean_db';
 
     console.info('Conectando com o Banco de Dados...');
 
@@ -78,6 +78,6 @@ const { MongoClient, ObjectId } = require('mongodb');
 
     });
 
-    app.listen(3000);
+    app.listen( process.env.PORT || 3000);
 
 })();
